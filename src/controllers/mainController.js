@@ -8,11 +8,16 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const controller = {
 	index: (req, res) => {
-		// Do the magic
+		res.render('index')
 	},
 	search: (req, res) => {
-		// Do the magic
-	},
+		let busqueda = req.query.search.toLowerCase();
+		let productos = products.filter( producto => producto.name == busqueda)
+		res.render('results', {
+			productos,
+			busqueda
+		})
+	}
 };
 
 module.exports = controller;
