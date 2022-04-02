@@ -6,23 +6,24 @@ const router = express.Router();
 const productsController = require('../controllers/productsController');
 
 /*** GET ALL PRODUCTS ***/ 
-router.???('/', productsController.index); 
-
-/*** CREATE ONE PRODUCT ***/ 
-router.???('/???/', productsController.create); 
-router.???('/', productsController.store); 
+router.get('/', productsController.index); 
 
 
 /*** GET ONE PRODUCT ***/ 
-router.???('/:id/', productsController.detail); 
+router.get('/detail/:id', productsController.detail);  
+
+/*** CREATE ONE PRODUCT ***/ 
+/* router.???('/???/', productsController.create); 
+router.???('/', productsController.store);  */
+
 
 /*** EDIT ONE PRODUCT ***/ 
-router.???('/:id/???', productsController.edit); 
-router.???('/:id', productsController.update); 
+/* router.???('/:id/???', productsController.edit); 
+router.???('/:id', productsController.update);  */
 
 
 /*** DELETE ONE PRODUCT***/ 
-router.???('/:id', productsController.destroy); 
+/* router.???('/:id', productsController.destroy);  */
 
 
 module.exports = router;
