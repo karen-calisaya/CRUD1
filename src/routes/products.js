@@ -13,13 +13,13 @@ router.get('/', productsController.index);
 router.get('/detail/:id', productsController.detail);  
 
 /*** CREATE ONE PRODUCT ***/ 
-/* router.???('/???/', productsController.create); 
-router.???('/', productsController.store);  */
+router.get('/create', productsController.create); /* formulario para agregar producto */
+router.post('/create', productsController.store);  /* envia y guar los datos para agregar producto  */
 
 
 /*** EDIT ONE PRODUCT ***/ 
-/* router.???('/:id/???', productsController.edit); 
-router.???('/:id', productsController.update);  */
+router.get('/edit/:id', productsController.edit); 
+/* router.???('/:id', productsController.update);   */
 
 
 /*** DELETE ONE PRODUCT***/ 

@@ -4,6 +4,7 @@ const path = require('path');
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
+
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const controller = {
@@ -25,18 +26,42 @@ const controller = {
 
 	// Create - Form to create
 	create: (req, res) => {
-		// Do the magic
+		res.render('product-create-form', {  /* o ruta podemos renderizar */
+			title: 'Formulario de creación'
+		})
 	},
 	
 	// Create -  Method to store
 	store: (req, res) => {
-		// Do the magic
+		let lastId = 0;
+		products.forEach( product => {
+			if(product.id > lastId){
+				lastId = product.id
+			}
+		})
+		/* ahora traemos lo que viene por querystring */
+		let nuevoProducto = {
+			id: lastId + 1,
+			name: req.body.name,
+			price: req.body.price,
+			discount: req.body.discount,
+			category: req.body.category,
+			description: req.body.description
+		}
+		/* cargamos la nuevo producto al array  */
+		products.push(nuevoProducto)
+		/* sobreescribimos el json */
+		writeJson(products)    /* ................... */
+		/* redireccionamos a la vista  de productos*/
+		res.redirect('/products')
 	},
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		// Do the magic
+		
 	},
+
+
 	// Update - Method to update
 	update: (req, res) => {
 		// Do the magic
