@@ -4,8 +4,9 @@ const path = require('path');
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-
-const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+const writeJSON = (dataBase) => {
+	fs.writeFileSync(path.join(__dirname, '../data/productsDataBase.json'), JSON.stringify( dataBase), 'utf-8')
+}
 
 const controller = {
 	// Root - Show all products
@@ -41,17 +42,14 @@ const controller = {
 		})
 		/* ahora traemos lo que viene por querystring */
 		let nuevoProducto = {
+			...req.body,
 			id: lastId + 1,
-			name: req.body.name,
-			price: req.body.price,
-			discount: req.body.discount,
-			category: req.body.category,
-			description: req.body.description
+			
 		}
 		/* cargamos la nuevo producto al array  */
 		products.push(nuevoProducto)
 		/* sobreescribimos el json */
-		writeJson(products)    /* ................... */
+		writeJSON(products)    /* ................... */
 		/* redireccionamos a la vista  de productos*/
 		res.redirect('/products')
 	},

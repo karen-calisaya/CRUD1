@@ -42,5 +42,5 @@ Thumbs.db
 *.cfg
 .htaccess
 *.config
-node_modules/
-.vscode/
+/node_modules
+/.vscode
