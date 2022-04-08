@@ -43,8 +43,7 @@ const controller = {
 		/* ahora traemos lo que viene por querystring */
 		let nuevoProducto = {
 			...req.body,
-			id: lastId + 1,
-			
+			id: lastId + 1,			
 		}
 		/* cargamos la nuevo producto al array  */
 		products.push(nuevoProducto)
@@ -56,9 +55,11 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		
+		let product = products.find(product => product.id == +req.params.id)
+		res.render('product-edit-form', {
+			product
+		})
 	},
-
 
 	// Update - Method to update
 	update: (req, res) => {
