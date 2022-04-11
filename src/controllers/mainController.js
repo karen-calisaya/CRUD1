@@ -11,8 +11,12 @@ const controller = {
 		let productosOfertas = products.filter(product => {
 			return product.discount > 1
 		})
+		let productosPorPrecio = products.filter(product => {
+			return product.price < 5000
+		})
 		res.render('index', {
-			productosOfertas
+			productosOfertas,
+			productosPorPrecio
 		})
 	},
 	search: (req, res) => {
