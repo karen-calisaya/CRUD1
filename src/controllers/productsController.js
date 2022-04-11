@@ -80,10 +80,23 @@ const controller = {
 		res.redirect('/products');
 	},
 
-	// Delete - Delete one product from DB
+	// Delete - Borra productos en db
 	destroy : (req, res) => {
-		// Do the magic
+		let productId = +req.params.id;
+		products.forEach(product => {
+			if(product.id === productId){
+				let indiceProductoABorrar = products.indexOf(product);
+				products.splice(indiceProductoABorrar, 1)
+			}
+		})
+		/* hay que sobreescribir el json */
+		writeJSON(products);
+		res.redirect('/products');
 	}
 };
+
+/* id del producto no es lo mismo que la posicion dentro del array.
+Por eso uso indexOf para buscar en que indice esta el producto que deseo
+borrar */
 
 module.exports = controller;
