@@ -53,7 +53,7 @@ const controller = {
 		res.redirect('/products')
 	},
 
-	// Update - Form to edit
+	// Update - Busca el producto a editar y me trae los cambios a editar
 	edit: (req, res) => {
 		let productId = +req.params.id;
 		let product = products.find(product => product.id === productId)
@@ -62,9 +62,22 @@ const controller = {
 		})
 	},
 
-	// Update - Method to update
+	// Update - Guarda datos editados
 	update: (req, res) => {
-		// Do the magic
+		let productId = +req.params.id;
+		products.forEach(product => {
+			if(product.id === productId){
+				product.name = req.body.name
+				product.price = req.body.price
+				product.discount = req.body.discount
+				product.category = req.body.category
+				product.description = req.body.description
+			}
+		})
+		/* escribir el json */
+		writeJSON(products);
+		/* redirecciono */
+		res.redirect('/products');
 	},
 
 	// Delete - Delete one product from DB

@@ -19,7 +19,7 @@ router.post('/create', productsController.store);  /* envia y guar los datos par
 
 /*** EDIT ONE PRODUCT ***/ 
 router.get('/edit/:id', productsController.edit); 
-router.put('/:id', productsController.update);   
+router.put('/edit/:id', productsController.update);   
 
 
 /*** DELETE ONE PRODUCT***/ 
