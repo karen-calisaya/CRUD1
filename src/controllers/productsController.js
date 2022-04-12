@@ -4,6 +4,8 @@ const path = require('path');
 const productsFilePath = path.join(__dirname, '../data/productsDataBase.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
+const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
 const writeJSON = (dataBase) => {
 	fs.writeFileSync(path.join(__dirname, '../data/productsDataBase.json'), JSON.stringify( dataBase), 'utf-8')
 }
@@ -13,7 +15,8 @@ const controller = {
 	index: (req, res) => {
 		res.render('products', {
 			title: 'Todos los productos',
-			products
+			products,
+			toThousand
 		})
 	},
 
@@ -21,7 +24,8 @@ const controller = {
 	detail: (req, res) => {
 		let product = products.find( product => product.id == req.params.id)
 		res.render('detail', {
-			product
+			product,
+			toThousand
 		})
 	},
 
@@ -40,12 +44,13 @@ const controller = {
 				lastId = product.id
 			}
 		})
-		/* ahora traemos lo que viene por querystring */
+		/* ahora traemos lo que viene por el formulario */
 		let nuevoProducto = {
-			...req.body,
-			id: lastId + 1,			
+			...req.body, /* express operator: taeme todas la propiedades del objeto req.body y asignalas nuevamente a alos valores que vineen por el formulario*/
+			id: lastId + 1,
+			image:"default-image.png"			
 		}
-		/* cargamos la nuevo producto al array  */
+		/* cargamos la nuevo producto al array */
 		products.push(nuevoProducto)
 		/* sobreescribimos el json */
 		writeJSON(products)    /* ................... */
