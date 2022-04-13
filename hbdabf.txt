@@ -1,0 +1,9 @@
+1.installar dependencia
+2. carpeta
+3. codigo
+4. admin router..con el en post en vez de array, single
+5. ir a admin products controller
+6 ir al formulario de creacion de producto
+
+
+agregar un input file en el formulario de creacion

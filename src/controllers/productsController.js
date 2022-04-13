@@ -48,7 +48,7 @@ const controller = {
 		let nuevoProducto = {
 			...req.body, /* express operator: taeme todas la propiedades del objeto req.body y asignalas nuevamente a alos valores que vineen por el formulario*/
 			id: lastId + 1,
-			image:"default-image.png"			
+			image: req.file ? req.file.filename : "default-image.png",			
 		}
 		/* cargamos la nuevo producto al array */
 		products.push(nuevoProducto)
@@ -60,7 +60,7 @@ const controller = {
 
 	// Update - Busca el producto a editar y me trae los cambios a editar
 	edit: (req, res) => {
-		let productId = +req.params.id;
+		let productId = +req.params.id; /* capturamos id y con + lo pasamos a string */
 		let product = products.find(product => product.id === productId)
 		res.render('product-edit-form', {
 			product
@@ -69,7 +69,7 @@ const controller = {
 
 	// Update - Guarda datos editados
 	update: (req, res) => {
-		let productId = +req.params.id;
+		let productId = +req.params.id; /* paso todos los datos de mi baste de datos */
 		products.forEach(product => {
 			if(product.id === productId){
 				product.name = req.body.name
@@ -78,11 +78,29 @@ const controller = {
 				product.category = req.body.category
 				product.description = req.body.description
 			}
-		})
+		}) 
+		/* products = products.map(
+			product => 
+			product.id === productId ?
+			{id: product.id, ...req.body, image: product.image} : 
+			product
+		)
+	/* 	const {name, price, discount, category, description} = req.body;
+		products.forEach(product => {
+			if(product.id === productId){
+				product.name = name
+				product.price = price
+				product.discount = discount
+				product.category = category
+				product.description = description
+			}
+		}) */
+ 
 		/* escribir el json */
 		writeJSON(products);
 		/* redirecciono */
-		res.redirect('/products');
+		/* res.send(`Modificaste el producto ${req.body.name}`) */
+		res.redirect('/products'); 
 	},
 
 	// Delete - Borra productos en db
@@ -91,7 +109,7 @@ const controller = {
 		products.forEach(product => {
 			if(product.id === productId){
 				let indiceProductoABorrar = products.indexOf(product);
-				products.splice(indiceProductoABorrar, 1)
+				products.splice(indiceProductoABorrar, 1);
 			}
 		})
 		/* hay que sobreescribir el json */
