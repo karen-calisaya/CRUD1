@@ -5,3 +5,7 @@
 #### DATO: Entender los métodos HTTP es fundamental para comprender la forma en que funcionan las peticiones al servidor, y como este nos responde según el tipo de petición que hagamos. No es lo mismo un GET que un POST. Además, es importante que entendamos que una misma URL puede ser tratada de forma diferente por el servidor, según la petición se haga, por ejemplo: por POST, GET, etc.🌟🌟
 #### Aqui una visualización del mismo: 
 
+
+https://user-images.githubusercontent.com/98064470/189008810-9c86c315-f683-47fa-a637-dd5d517f6e15.mp4
+
+
